@@ -1,0 +1,15 @@
+idea 1
+    iterate through the string and build a new one as you go, when you hit a space place the %20.
+    When your new string is of input length end.
+
+    This is not inplace
+
+idea 2
+    iterate through, when space is found copy the whole remainder of the string down to make space for %20
+
+    copying the string will yeild pretty bad runtime.
+
+idea 3
+    iterate through backwards, 
+    this way the trialing spaces in the input will create buffer enough that
+     you can replace the spaces with %20 inplace without losing info
