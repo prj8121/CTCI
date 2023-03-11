@@ -1,0 +1,36 @@
+bad solution
+    generate all permutations check if other string is in list
+    v2
+        as you genertate check against other string
+        still bad
+
+A string s1 is a permutation of a string s2 if:
+    they contain the same number of each character
+
+idea 1
+    get a list of character frequencies, if they match return true
+    do character frequencies with hashmap?
+
+    runs through all characters of both strings doing a hashmap access on each character;
+    Then runs through all the hashmap entries for each string comparing them
+    n = length of string
+    m = number of unique characters
+    O(2n + 2m)
+    m ~ n  and worst case m = n so:
+    O(4n) -> O(n)
+
+idea 2
+    sort the strings and then compare them. If equal return true
+    sorting takes O(n log n)
+    so above solution is faster
+
+idea 3
+    iterate through s1, pop the first occurance of each char from s2. 
+    If no occurance return false, if s2 is not empty when s1 is depleted return false
+    else true
+
+    popping is simliar to searching (just add removing an element) so it's O(n) time
+    maybe removing an element is time complex?
+        I guess you'd have to copy the string into a smaller string but that is also O(n) time
+
+    
