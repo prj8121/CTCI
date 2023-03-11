@@ -1,0 +1,49 @@
+idea 1
+    iterate through and create a list of character frequencies; if any > 1 return false
+    O(n) runtime
+    
+    sub idea
+        iterate through adding each char to a list (maybe set?) of 'seen' characters; 
+        when char is already seen return false
+        runs through the list only once rather than twice like in the initial idea
+
+        seems like insertion time to the seen list is the bottleneck because thats where the duplicate check happens
+
+idea 2
+    with no data structues; for each char iterate through and check for matches in remainder of string
+    this is pretty innefficient:
+        O(n * (n-1 + ... + 3 + 2 + 1)) 
+        O(n * (n(n-1)/2))
+        O(n^3)
+    
+idea 3
+    is there some reason to use a hashmap here?
+    makes it O(1) to check if a char is in the seen list
+
+    initialize hashmap to have all 0s (is this a thing ? how do hashmaps initialize/scale)
+        You can just search the hashmap when you want to add a new value since acess is O(1)
+    iterate through string adding 1 to a hashmap value with keys of the character.
+    As you go check if the value is 2. if 2 then return false
+
+    This gives you O(n) time because you only loop through the string once and each insertion is O(1) because of the hashmap
+    Pretty bad on space though (because the hashmap takes at least space equal to the number of unique characters) (also I just realized why this isn't the best solution (see next idea))
+
+idea 4
+    iterate through adding 1 to the value of a dictionary with a key of the character (and an initial value of 0)
+    when one of the values becomes 2 return false
+
+    hmm this initially seemed really good but:
+    to add the initial 0 value key value pair you have to compare the current char to all the keys in the dict
+    I guess I was expecting the dictionary to have the same O(1) access time as the hashmap but forgot about the above line
+
+    but also how do you handle collisions? store the character and the value I guess? having a keyspace equivalent to all the characters sounds innefficient.
+    does this still mean the hashmap is the best solution?
+
+idea 5
+    maybe we can put the seen characters in order so that we can access them in O(log(n)) time
+    that way each character only gets compared to the list of seen characters once.
+    but this is already true because we exit as soon as the duplicate comparison happens
+    so this can't be faster
+
+
+seems like O(1) with hashmap and O(n^2) with out other data structures.
