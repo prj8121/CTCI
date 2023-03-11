@@ -34,3 +34,5 @@ idea 3
         I guess you'd have to copy the string into a smaller string but that is also O(n) time
 
     
+Could throw in a check to see if the inputs are of the same length at the beginning of any/all of these
+    or make it in the middle 
