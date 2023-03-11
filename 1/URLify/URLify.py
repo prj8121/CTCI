@@ -1,9 +1,11 @@
+from typing import Callable
+
 def URLify(string : str, space : int) -> str:
     str_arr = list(string)
     parse_index = space - 1         # Index to parse
     place_index = len(str_arr) - 1  # Index to place character in
 
-    while parse_index > 0:
+    while parse_index >= 0:
         if str_arr[parse_index] != " ":
             str_arr[place_index] = str_arr[parse_index]
             place_index -= 1
@@ -15,4 +17,11 @@ def URLify(string : str, space : int) -> str:
     
     return "".join(str_arr)
 
-print(URLify("Mr John Smith    ", 13))
+
+def test(URLifyVersion : Callable = URLify ):
+    cases = [("Mr John Smith    ", 13), ("abc", 3), ("ab c  ", 4), (" abc  ", 4), ("      ", 2), ("Mr  John Smith      ", 14)]
+    
+    for case in cases:
+        print(f'{case[0]}:{URLifyVersion(*case)}')
+
+test()
