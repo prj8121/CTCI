@@ -1,0 +1,9 @@
+If I were doing this manually I would check that there was only one character with an odd frequency
+
+idea 1
+    iterate through counting character frequency in a hashmap
+    check that exactly one of the frequencies is odd
+
+    This is O(n) because you go through linearly twice, once when counting, once when checking
+
+    I'm not seeing a way to do much better than this
