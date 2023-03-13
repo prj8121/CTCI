@@ -1,0 +1,15 @@
+s1 = first string,      s2 = second string
+could generate all the strings one edit away and then check that that list contains s2
+    This is surely not the best option
+
+Maybe something works where we remove all the characters that match up and check the difference
+Maybe some sort of bit operation that zeros out the characters that match already.
+
+iterate through shorter string until first character that doesn't match
+    if string lengths are the same:
+        iterate through the rest, if any don't match return false, else true
+    skip the non matching character in the longer string and compare the rest of the strings
+
+    should be O(n) since you only iterate through once
+    
+

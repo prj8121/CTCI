@@ -7,3 +7,6 @@ idea 1
     This is O(n) because you go through linearly twice, once when counting, once when checking
 
     I'm not seeing a way to do much better than this
+
+
+Realized that there can be 0 character with odd frequency if the length is even
