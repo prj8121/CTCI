@@ -1,0 +1,50 @@
+initial idea is to iteratively rotate s1 and compare it to s2 
+    until they match or we've cycled back to the original s1
+
+    This would be inefficient, each rotation is O(n) and each comparison is O(n)
+
+    could be sped up by iterating through to find the indexes of characters matching the first char in s1
+    then only try the rotations that align the matching characters
+
+    this is still technically O(n^3)
+
+maybe theres a solution where we search for the first character of s1 in s2 and then start comparing.
+    this should only be O(2n) -> O(n) rather than the O(n^3) in the above
+
+    there might be an optimization where we save the part we search over since that will be compared again later
+
+    we also get one call of isSubstring, maybe once we hit the end of the string we can use isSubstring to check the remainder
+
+    just realized this solution breaks horribly on cases where the first character of s1 exists multiple times in s2 (and s1)
+        for example:    zabczdef, zdefzabc  are rotations of eachother but would fail here
+
+        does searching for the last matching character instead help?
+            abaa, aaba
+
+
+testing, estingt
+
+maybe we can iterate through until some point and copy what we've run over to make 
+    waterbottle, erbottlewat    into    waterbottle, waterbottlewat
+        and then use substring
+
+    does splitting in the middle always work?
+        waterbottlewater
+
+        testingtes
+
+    idea:
+        copy first half of string and append to end of s1 check if s2 is a substring of the new s1
+            actually I think we might need to just copy s1 entirely onto itself
+                can this give false positives?
+                    abcda becomes abcdaabcda
+                        does abcdaabcda contain any 5 char substrings that are not rotations of abcda?
+                            abcda
+                            bcdaa
+                            cdaab
+                            daabc
+                            aabcd
+                        is this all of the rotations?
+                            yes
+
+            This takes O(2n) -> O(n) to create the new string + the call to isSubstring
