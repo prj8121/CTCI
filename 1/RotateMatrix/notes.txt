@@ -1,0 +1,56 @@
+just have to come up with a function that translates the indecies in the original array to their new locations
+    0, 0 -> 0, 2
+    0, 1 -> 1, 2
+    0, 2 -> 2, 2
+
+    1, 0 -> 0, 1
+    1, 1 -> 1, 1
+    1, 2 -> 2, 1
+
+    2, 0 -> 0, 0
+    2, 1 -> 1, 0
+    2, 2 -> 2, 0
+
+    if we are going row by row, we know each successive row becomes the next column from the right
+
+    so a value at (r, c) ends up at (c, N - r)
+        how to express this function as a matrix?
+
+        how to not lose information?
+            could create use a stack:
+                record the value about to be overwritten and go process where that value is meant to go next.
+                There are loops so would need to check that locations have not yet been processed.
+
+                This seems stupid in this case because the space taken by the stack is surely greater than 
+                 the space saved by operating in place on the original matrix especially considering how we'd
+                 track whether or not a location has been processed already.
+
+Maybe we can exploit the 4 long loops to process in place becaues no information is lost if we process them together
+    Was able to do this.
+    essentially process the outside edge by doing those sets of 4 along the first row 
+        (skipping last element since it would be redundant because it is in the loop for the first element).
+    Then on next row decrease window size to capture the row without the first element and last two elements 
+        and process the sets of 4 related to those elements
+    Keep going subtracting one off each side of the window. 
+    
+    This works fine for even and odd values of N so long as you stop the row processing before row N//2
+
+    O(N^2) but pretty good N^2 because the inner loop gets shorter by two every iteration
+
+                
+
+Is matrix multiplication relevant here? surely there is a rotation matrix
+
+
+[
+    1 2 3
+    4 5 6
+    7 8 9
+]
+
+[
+    7 4 1
+    8 5 2
+    9 6 3
+]
+

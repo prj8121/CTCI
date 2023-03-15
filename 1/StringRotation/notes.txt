@@ -47,4 +47,4 @@ maybe we can iterate through until some point and copy what we've run over to ma
                         is this all of the rotations?
                             yes
 
-            This takes O(2n) -> O(n) to create the new string + the call to isSubstring
+            This takes O(2n) -> O(n) to create the new string + the call to isSubstring (which should be O(n))
