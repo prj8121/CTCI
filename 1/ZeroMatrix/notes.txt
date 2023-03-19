@@ -1,0 +1,59 @@
+worst case solution:
+    for each row:
+        for each col:
+            zero the entire row/col of each 0 element in a seperate results array
+
+if we blindly zero rows and cols in place we will lose information by overwriting 0s with 0s
+(or if we think the other way, we will zero off of zeros we placed)
+
+maybe there is some snaking solution where we process element by element but then when we hit a 0:
+    we start zeroing the row/col until we hit another zero, after which we process that 0, etc
+
+
+idea 1:
+    parse whole array, store locations of zeros
+        zero array based on those.
+
+    O(N*M) for parsing
+    O(N+M - 1) for each zero
+    -> O(N*M) best case                 -> O(N^2) when N~=M
+    -> O(N*M*(N+M-1)) worst case        -> O(N^3) when N~=M
+    -> average case                     -> O(N^3) when N~=M
+
+idea 2:
+    same thing as idea 1 but only zero the set of rows / cols stored to avoid duplicates
+
+    this way we have 
+    O(N*M) parsing
+    then a maximum of 
+    O(N*M) zeroing
+    but we have to store a set of ~M rows and ~N cols
+
+
+    v2 of this:
+        get the multiplicative sum of each row and col,
+        for each row/col with msum of 0:
+            zero the row/col
+
+        is this faster?
+        It reduces the number of comparisions by replacing them with multiplications.
+
+    v3:
+        matrix multiplication
+
+        get vectors of the multiplicative sum of each row and col
+        call them row_msum and col_msum
+        set all non-zero values in them equal to 1
+
+        matrix multiply row_msum and col_msum onto the original matrix (in the proper orientation to zero the rows/cols)
+            just realized this isn't exactly a matrix multplication so much as a filter
+
+is there a way to do this in place?
+    maybe theres a trick where when we zero we mark spots that were already zero with -1?
+        This deals with overwriting zeros but not with parsing our own written zeros
+
+        could parse; marking each zero with -1 and each non-zero that would be zeroed with -2
+
+
+maybe there is a solution based writing only the rows cols that don't get zeroed into an araray of zeros
+    I don't see a clear way that this ends up more efficient
